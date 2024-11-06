@@ -12,7 +12,7 @@ class iconContent extends StatelessWidget {
       children: [
         Icon(icon, size: 80,),
         SizedBox(height: 15),
-        Text('$label', style: TextStyle(color: Color(0xFF8D8E98),fontSize: 18),)
+        Text('$label', style: TextStyle(color: Color(0xFF8D8E98),fontSize: 24),)
       ],
     );
   }

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:untitled3/reusable_card.dart';
 import 'icon_content.dart';
+import 'constants.dart';
 
-const double buttomContainerHeight = 80;
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const buttomContainerColor = Color(0xFFEB1555);
 
 enum Gender{male, female}
 
@@ -18,11 +15,8 @@ class InputPage extends StatefulWidget {
 
 
 class _InputPageState extends State<InputPage> {
-
   Gender? selectedGender;
-
-
-
+int height = 150;
 
 
 
@@ -45,7 +39,7 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     child: iconContent(icon: FontAwesomeIcons.mars, label: 'MALE',),
-                    color: selectedGender == Gender.male ? activeCardColor : inactiveCardColor,
+                    color: selectedGender == Gender.male ? kActiveCardColor : kInactiveCardColor,
                   ),
                 ),
                 Expanded(
@@ -56,14 +50,41 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     child: iconContent(icon: FontAwesomeIcons.venus, label: 'FEMALE',),
-                    color: selectedGender == Gender.female ? activeCardColor : inactiveCardColor,
+                    color: selectedGender == Gender.female ? kActiveCardColor : kInactiveCardColor,
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(),
+            child: ReusableCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('HEIGHT', style: kLabelTextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text('$height', style: kNumberTextStyle),
+                      Text('cm', style: kLabelTextStyle)
+                    ],
+                  ),
+                  Slider(
+                    min: 120,
+                      max: 220,
+                      value: height.toDouble(),
+                      onChanged: (value){
+                      setState(() {
+                        height = value.round();
+                        print('$value');
+                      });},
+                  )
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
@@ -78,10 +99,10 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-            color: buttomContainerColor,
+            color: kBottomContainerColor,
             margin: EdgeInsets.only(top: 10),
             width: double.infinity,
-            height: buttomContainerHeight,
+            height: kBottomContainerHeight,
           )
         ],
       ),

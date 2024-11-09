@@ -17,7 +17,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
 int height = 150;
-
+int weight = 70;
+int age = 20;
 
 
   @override
@@ -90,10 +91,64 @@ int height = 150;
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(),
+                  child: ReusableCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('WEIGHT', style: kLabelTextStyle),
+                        Text('$weight', style: kNumberTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                              setState(() {
+                                weight--;
+                              });
+                              },
+                            ),
+                            SizedBox(width: 15,),
+                            RoundIconButton(icon: FontAwesomeIcons.plus,
+                            onPress: (){
+                              setState(() {
+                                weight++;
+                              });
+                            },),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(),
+                  child: ReusableCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('AGE', style: kLabelTextStyle),
+                        Text('$age', style: kNumberTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 15,),
+                            RoundIconButton(icon: FontAwesomeIcons.plus,
+                              onPress: (){
+                                setState(() {
+                                  age++;
+                                });
+                              },),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -106,6 +161,28 @@ int height = 150;
           )
         ],
       ),
+    );
+
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  final IconData? icon;
+  final VoidCallback? onPress;
+  RoundIconButton({this.icon, required this.onPress});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      onPressed: onPress,
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      elevation: 0,
     );
   }
 }

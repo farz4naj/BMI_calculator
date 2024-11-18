@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:untitled3/Calculator.dart';
 import 'package:untitled3/result_page.dart';
 import 'package:untitled3/reusable_card.dart';
 import 'icon_content.dart';
 import 'constants.dart';
+import 'bottom_button.dart';
 
 
 enum Gender{male, female}
@@ -154,24 +156,23 @@ int age = 20;
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder:  (context) => ResultsPage()));
-            },
-            child: Container(
-              child: Text('CALCULATE', style: TextStyle(color: Colors.white,  fontSize: 30),),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-            ),
-          )
+          BottomButton(title: 'CALCULATE', onTap: (){
+            Calculator calculator= Calculator(weight: weight, height: height);
+
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(
+              bmiResult: calculator.calculateBMI(),
+              resultText: calculator.getResult(),
+              interpretation: calculator.getInterpretation(),
+            )));
+          })
         ],
       ),
     );
 
   }
 }
+
+
 
 class RoundIconButton extends StatelessWidget {
   final IconData? icon;
